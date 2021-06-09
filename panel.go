@@ -541,7 +541,8 @@ type Target struct {
 	} `json:"bucketAggs,omitempty"`
 
 	// For Graphite
-	Target string `json:"target,omitempty"`
+	Target     string `json:"target,omitempty"`
+	TargetFull string `json:"targetFull,omitempty"`
 
 	// For CloudWatch
 	Namespace  string            `json:"namespace,omitempty"`
