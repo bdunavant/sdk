@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/grafana-tools/sdk"
+	"github.com/rizkybiz/sdk"
 )
 
 func TestAdminOperations(t *testing.T) {
