@@ -118,7 +118,7 @@ func (r *Client) doRequest(ctx context.Context, method, query string, params url
 	req.Header.Set("User-Agent", "autograf")
 	if r.debug {
 		dump, _ := httputil.DumpRequestOut(req, true)
-		fmt.Printf("%v\n", dump)
+		fmt.Printf("%v\n", string(dump))
 	}
 	resp, err := r.client.Do(req)
 	if err != nil {
