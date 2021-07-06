@@ -51,7 +51,7 @@ func main() {
 		os.Exit(0)
 	}
 	ctx := context.Background()
-	c := sdk.NewClient(os.Args[1], os.Args[2], sdk.DefaultHTTPClient)
+	c := sdk.NewClient(os.Args[1], os.Args[2], sdk.DefaultHTTPClient, false)
 	filesInDir, err = ioutil.ReadDir(".")
 	if err != nil {
 		log.Fatal(err)

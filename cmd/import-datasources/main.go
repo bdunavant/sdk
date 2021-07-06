@@ -52,7 +52,7 @@ func main() {
 		os.Exit(0)
 	}
 	ctx := context.Background()
-	c := sdk.NewClient(os.Args[1], os.Args[2], sdk.DefaultHTTPClient)
+	c := sdk.NewClient(os.Args[1], os.Args[2], sdk.DefaultHTTPClient, false)
 	if datasources, err = c.GetAllDatasources(ctx); err != nil {
 		fmt.Fprint(os.Stderr, err)
 		os.Exit(1)
