@@ -26,6 +26,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"net/http/httputil"
 	"net/url"
 	"path"
 	"strings"
@@ -42,6 +43,7 @@ type Client struct {
 	basicAuth     bool
 	anonymousAuth bool
 	client        *http.Client
+	debug         bool
 }
 
 // StatusMessage reflects status message as it returned by Grafana REST API.
@@ -59,7 +61,7 @@ type StatusMessage struct {
 // NewClient initializes client for interacting with an instance of Grafana server;
 // apiKeyOrBasicAuth accepts either 'username:password' basic authentication credentials,
 // or a Grafana API key
-func NewClient(apiURL, apiKeyOrBasicAuth string, client *http.Client) *Client {
+func NewClient(apiURL, apiKeyOrBasicAuth string, client *http.Client, debug bool) *Client {
 	key := ""
 	var anonymousAuth bool
 	if apiKeyOrBasicAuth == "" {
@@ -74,7 +76,7 @@ func NewClient(apiURL, apiKeyOrBasicAuth string, client *http.Client) *Client {
 		parts := strings.Split(apiKeyOrBasicAuth, ":")
 		baseURL.User = url.UserPassword(parts[0], parts[1])
 	}
-	return &Client{baseURL: baseURL.String(), basicAuth: basicAuth, anonymousAuth: anonymousAuth, key: key, client: client}
+	return &Client{baseURL: baseURL.String(), basicAuth: basicAuth, anonymousAuth: anonymousAuth, key: key, client: client, debug: debug}
 }
 
 func (r *Client) get(ctx context.Context, query string, params url.Values) ([]byte, int, error) {
@@ -114,6 +116,10 @@ func (r *Client) doRequest(ctx context.Context, method, query string, params url
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("User-Agent", "autograf")
+	if r.debug {
+		dump, _ := httputil.DumpRequestOut(req, true)
+		fmt.Printf("%q", dump)
+	}
 	resp, err := r.client.Do(req)
 	if err != nil {
 		return nil, 0, err
