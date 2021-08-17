@@ -31,7 +31,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/rizkybiz/sdk"
+	"github.com/bdunavant/sdk"
 )
 
 func main() {

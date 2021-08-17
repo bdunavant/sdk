@@ -7,7 +7,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/rizkybiz/sdk"
+	"github.com/bdunavant/sdk"
 )
 
 func getDebugURL(t *testing.T) string {

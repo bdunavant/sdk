@@ -24,7 +24,7 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/rizkybiz/sdk"
+	"github.com/bdunavant/sdk"
 )
 
 func TestUnmarshal_NewEmptyDashboard26(t *testing.T) {

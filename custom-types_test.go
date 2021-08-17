@@ -25,7 +25,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/rizkybiz/sdk"
+	"github.com/bdunavant/sdk"
 )
 
 func TestIntString_Unmarshal(t *testing.T) {

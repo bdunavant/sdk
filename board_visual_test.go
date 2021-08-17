@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/chromedp/chromedp"
-	"github.com/rizkybiz/sdk"
+	"github.com/bdunavant/sdk"
 )
 
 /*

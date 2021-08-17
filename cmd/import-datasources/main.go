@@ -36,7 +36,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/rizkybiz/sdk"
+	"github.com/bdunavant/sdk"
 )
 
 func main() {

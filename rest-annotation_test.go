@@ -4,7 +4,7 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/rizkybiz/sdk"
+	"github.com/bdunavant/sdk"
 )
 
 func TestAnnotationOptions(t *testing.T) {

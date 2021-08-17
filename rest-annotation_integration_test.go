@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/rizkybiz/sdk"
+	"github.com/bdunavant/sdk"
 )
 
 func TestAnnotations(t *testing.T) {

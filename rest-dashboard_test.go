@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/rizkybiz/sdk"
+	"github.com/bdunavant/sdk"
 )
 
 func TestClient_SearchDashboards(t *testing.T) {

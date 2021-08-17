@@ -22,7 +22,7 @@ package sdk_test
 import (
 	"testing"
 
-	"github.com/rizkybiz/sdk"
+    "github.com/bdunavant/sdk"
 )
 
 func TestAddTags(t *testing.T) {

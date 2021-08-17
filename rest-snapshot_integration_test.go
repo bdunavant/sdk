@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/rizkybiz/sdk"
+	"github.com/bdunavant/sdk"
 )
 
 func Test_Snapshot_Create(t *testing.T) {

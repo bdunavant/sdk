@@ -1,4 +1,4 @@
-module github.com/rizkybiz/sdk
+module github.com/bdunavant/sdk
 
 go 1.13
 

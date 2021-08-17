@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/rizkybiz/sdk"
+	"github.com/bdunavant/sdk"
 )
 
 func TestAdminOperations(t *testing.T) {
