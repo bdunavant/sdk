@@ -27,6 +27,17 @@ import (
 	"github.com/bdunavant/sdk"
 )
 
+func TestUnmarshal_TagsAsSliceDashboard26(t *testing.T) {
+	var board sdk.Board
+	raw, _ := ioutil.ReadFile("testdata/tags-as-slice.json")
+
+	err := json.Unmarshal(raw, &board)
+
+	if err != nil {
+		t.Error(err)
+	}
+}
+
 func TestUnmarshal_NewEmptyDashboard26(t *testing.T) {
 	var board sdk.Board
 	raw, _ := ioutil.ReadFile("testdata/new-empty-dashboard-2.6.json")
