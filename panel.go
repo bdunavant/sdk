@@ -503,10 +503,7 @@ type Target struct {
 		Params   []string `json:"params,omitempty"`
 		Datatype string   `json:"datatype,omitempty"`
 	} `json:"where,omitempty"`
-	Group []struct {
-		Type   string   `json:"type,omitempty"`
-		Params []string `json:"params,omitempty"`
-	} `json:"group,omitempty"`
+	Group json.RawMessage `json:"group,omitempty"`
 
 	// For Prometheus
 	Expr           string `json:"expr,omitempty"`
