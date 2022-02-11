@@ -60,6 +60,17 @@ func TestUnmarshal_EmptyDashboardWithTemplating26(t *testing.T) {
 	}
 }
 
+func TestUnmarshal_DashboardWithCirconusQueryTemplating(t *testing.T) {
+	var board sdk.Board
+	raw, _ := ioutil.ReadFile("testdata/empty-dashboard-with-circonus-template-query.json")
+
+	err := json.Unmarshal(raw, &board)
+
+	if err != nil {
+		t.Error(err)
+	}
+}
+
 func TestUnmarshal_EmptyDashboardWithAnnotation26(t *testing.T) {
 	var board sdk.Board
 	raw, _ := ioutil.ReadFile("testdata/empty-dashboard-with-annotation-2.6.json")
