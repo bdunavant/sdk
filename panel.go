@@ -485,9 +485,10 @@ type Target struct {
 	Hide       bool   `json:"hide,omitempty"`
 
 	// For Circonus
-	QueryType string   `json:"querytype,omitempty"`
-	Segments  []string `json:"segments,omitempty"`
-	MinPeriod string   `json:"min_period,omitempty"`
+	QueryType    string   `json:"querytype,omitempty"`
+	QueryDisplay string   `json:"queryDisplay,omitempty"`
+	Segments     []string `json:"segments,omitempty"`
+	MinPeriod    string   `json:"min_period,omitempty"`
 
 	// For PostgreSQL
 	Table        string `json:"table,omitempty"`
