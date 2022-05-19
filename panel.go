@@ -164,7 +164,7 @@ type (
 	FieldConfig struct {
 		Defaults struct {
 			Unit      *string `json:"unit,omitempty"`
-			Threshold struct {
+			Threshold *struct {
 				Mode  *string `json:"mode,omitempty"`
 				Steps []struct {
 					Color *string `json:"color,omitempty"`
@@ -228,6 +228,7 @@ type (
 		ShowHeader  *bool         `json:"showHeader,omitempty"`
 		Sort        *Sort         `json:"sort,omitempty"`
 		Styles      []ColumnStyle `json:"styles,omitempty"`
+		Targets     []Target      `json:"targets,omitempty"`
 		FieldConfig *FieldConfig  `json:"fieldConfig,omitempty"`
 		Options     struct {
 			Content *string `json:"content,omitempty"`
