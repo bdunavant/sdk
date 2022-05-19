@@ -64,8 +64,8 @@ type (
 	panelType   int8
 	CommonPanel struct {
 		Datasource *string `json:"datasource,omitempty"` // metrics
-		Editable   bool    `json:"editable"`
-		Error      bool    `json:"error"`
+		Editable   *bool   `json:"editable,omitempty"`
+		Error      *bool   `json:"error,omitempty"`
 		GridPos    struct {
 			H *json.Number `json:"h,omitempty"`
 			W *json.Number `json:"w,omitempty"`
@@ -75,7 +75,7 @@ type (
 		Height           interface{} `json:"height,omitempty"` // general
 		HideTimeOverride *bool       `json:"hideTimeOverride,omitempty"`
 		ID               uint        `json:"id"`
-		IsNew            bool        `json:"isNew"`
+		IsNew            *bool       `json:"isNew,omitempty"`
 		Links            []Link      `json:"links,omitempty"`    // general
 		MinSpan          *float32    `json:"minSpan,omitempty"`  // templating options
 		OfType           panelType   `json:"-"`                  // it required for defining type of the panel
@@ -88,12 +88,12 @@ type (
 			Text     string `json:"text"`
 			Value    string `json:"value"`
 		} `json:"scopedVars,omitempty"`
-		Span        float32 `json:"span"`                  // general
-		Title       string  `json:"title"`                 // general
-		Description *string `json:"description,omitempty"` // general
-		Transparent bool    `json:"transparent"`
-		Type        string  `json:"type"`
-		Alert       *Alert  `json:"alert,omitempty"`
+		Span        *float32 `json:"span,omitempty"`        // general
+		Title       string   `json:"title"`                 // general
+		Description *string  `json:"description,omitempty"` // general
+		Transparent *bool    `json:"transparenti,omitempty"`
+		Type        string   `json:"type"`
+		Alert       *Alert   `json:"alert,omitempty"`
 	}
 	AlertEvaluator struct {
 		Params []float64 `json:"params,omitempty"`
@@ -163,15 +163,15 @@ type (
 	}
 	FieldConfig struct {
 		Defaults struct {
-			Unit      string `json:"unit"`
-			Threshold struct {
-				Mode  string `json:"mode"`
+			Unit      *string `json:"unit,omitempty"`
+			Threshold *struct {
+				Mode  *string `json:"mode,omitempty"`
 				Steps []struct {
-					Color string `json:"color"`
-					Value string `json:"value"`
-				} `json:"steps"`
-			} `json:"threshold"`
-		} `json:"defaults"`
+					Color *string `json:"color,omitempty"`
+					Value *string `json:"value,omitempty"`
+				} `json:"steps,omitempty"`
+			} `json:"threshold,omitempty"`
+		} `json:"defaults,omitempty"`
 	}
 	Options struct {
 		Orientation   string `json:"orientation"`
@@ -221,17 +221,18 @@ type (
 		Scroll    bool          `json:"scroll"` // from grafana 3.x
 	}
 	TextPanel struct {
-		Content     string        `json:"content"`
-		Mode        string        `json:"mode"`
-		PageSize    uint          `json:"pageSize"`
-		Scroll      bool          `json:"scroll"`
-		ShowHeader  bool          `json:"showHeader"`
-		Sort        Sort          `json:"sort"`
-		Styles      []ColumnStyle `json:"styles"`
-		FieldConfig FieldConfig   `json:"fieldConfig"`
+		Content     *string       `json:"content,omitempty"`
+		Mode        *string       `json:"mode,omitempty"`
+		PageSize    *uint         `json:"pageSize,omitempty"`
+		Scroll      *bool         `json:"scroll,omitempty"`
+		ShowHeader  *bool         `json:"showHeader,omitempty"`
+		Sort        *Sort         `json:"sort,omitempty"`
+		Styles      []ColumnStyle `json:"styles,omitempty"`
+		Targets     []Target      `json:"targets,omitempty"`
+		FieldConfig *FieldConfig  `json:"fieldConfig,omitempty"`
 		Options     struct {
-			Content string `json:"content"`
-			Mode    string `json:"mode"`
+			Content *string `json:"content,omitempty"`
+			Mode    *string `json:"mode,omitempty"`
 		} `json:"options"`
 	}
 	SinglestatPanel struct {
@@ -599,6 +600,14 @@ type RangeMap struct {
 	To   *string `json:"to,omitempty"`
 }
 
+func boolPtr(b bool) *bool {
+	return &b
+}
+
+func float32Ptr(f float32) *float32 {
+	return &f
+}
+
 // NewDashlist initializes panel with a dashlist panel.
 func NewDashlist(title string) *Panel {
 	if title == "" {
@@ -611,7 +620,7 @@ func NewDashlist(title string) *Panel {
 			Title:    title,
 			Type:     "dashlist",
 			Renderer: &render,
-			IsNew:    true},
+			IsNew:    boolPtr(true)},
 		DashlistPanel: &DashlistPanel{}}
 }
 
@@ -627,8 +636,8 @@ func NewGraph(title string) *Panel {
 			Title:    title,
 			Type:     "graph",
 			Renderer: &render,
-			Span:     12,
-			IsNew:    true},
+			Span:     float32Ptr(12),
+			IsNew:    boolPtr(true)},
 		GraphPanel: &GraphPanel{
 			NullPointMode: "connected",
 			Pointradius:   5,
@@ -649,7 +658,7 @@ func NewTable(title string) *Panel {
 			Title:    title,
 			Type:     "table",
 			Renderer: &render,
-			IsNew:    true},
+			IsNew:    boolPtr(true)},
 		TablePanel: &TablePanel{}}
 }
 
@@ -665,7 +674,7 @@ func NewText(title string) *Panel {
 			Title:    title,
 			Type:     "text",
 			Renderer: &render,
-			IsNew:    true},
+			IsNew:    boolPtr(true)},
 		TextPanel: &TextPanel{}}
 }
 
@@ -681,7 +690,7 @@ func NewSinglestat(title string) *Panel {
 			Title:    title,
 			Type:     "singlestat",
 			Renderer: &render,
-			IsNew:    true},
+			IsNew:    boolPtr(true)},
 		SinglestatPanel: &SinglestatPanel{}}
 }
 
@@ -697,7 +706,7 @@ func NewStat(title string) *Panel {
 			Title:    title,
 			Type:     "stat",
 			Renderer: &render,
-			IsNew:    true},
+			IsNew:    boolPtr(true)},
 		StatPanel: &StatPanel{}}
 }
 
@@ -713,7 +722,7 @@ func NewPluginlist(title string) *Panel {
 			Title:    title,
 			Type:     "pluginlist",
 			Renderer: &render,
-			IsNew:    true},
+			IsNew:    boolPtr(true)},
 		PluginlistPanel: &PluginlistPanel{}}
 }
 
@@ -728,7 +737,7 @@ func NewAlertlist(title string) *Panel {
 			Title:    title,
 			Type:     "alertlist",
 			Renderer: &render,
-			IsNew:    true},
+			IsNew:    boolPtr(true)},
 		AlertlistPanel: &AlertlistPanel{}}
 }
 
@@ -743,7 +752,7 @@ func NewHeatmap(title string) *Panel {
 			Title:    title,
 			Type:     "heatmap",
 			Renderer: &render,
-			IsNew:    true},
+			IsNew:    boolPtr(true)},
 		HeatmapPanel: &HeatmapPanel{}}
 }
 
@@ -759,7 +768,7 @@ func NewCustom(title string) *Panel {
 			Title:    title,
 			Type:     "singlestat",
 			Renderer: &render,
-			IsNew:    true},
+			IsNew:    boolPtr(true)},
 		CustomPanel: &CustomPanel{}}
 }
 
